@@ -35,8 +35,7 @@ export default function Navbar() {
     setUser(null);
     setPendingRequestsCount(0);
     setIsMobileMenuOpen(false);
-    router.refresh();
-    router.replace('/');
+    window.location.href = '/';
   };
 
   const toggleMobileMenu = () => {
