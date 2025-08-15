@@ -118,7 +118,7 @@ export default function RequestsPage() {
           </h1>
 
           <div className="mb-6">
-            <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg w-screen justify-around">
+            <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg justify-around">
               {[
                 { key: "all", label: "All" },
                 { key: "pending", label: "Pending" },
