@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Navbar from '../../components/Navbar';
-import { getMySkills, isAuthenticated } from '../../utils/api';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Navbar from "../../components/Navbar";
+import { getMySkills, isAuthenticated } from "../../utils/api";
 
 export default function MySkills() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function MySkills() {
 
   useEffect(() => {
     if (!isAuthenticated()) {
-      router.push('/login');
+      router.push("/login");
       return;
     }
     fetchMySkills();
@@ -23,7 +23,7 @@ export default function MySkills() {
       const data = await getMySkills();
       setMySkills(data);
     } catch (error) {
-      console.error('Error fetching skills:', error);
+      console.error("Error fetching skills:", error);
     } finally {
       setLoading(false);
     }
@@ -46,16 +46,21 @@ export default function MySkills() {
       <main className="container mx-auto px-4 py-8">
         <div>
           <h1 className="text-2xl font-bold mb-6 text-center">My Skills</h1>
-          
+
           {mySkills.length === 0 ? (
-            <p className="text-gray-600 text-center">You haven't posted any skills yet.</p>
+            <p className="text-gray-600 text-center">
+              You haven't posted any skills yet.
+            </p>
           ) : (
             <div className="space-y-6">
               {mySkills.map((skill) => (
-                <div key={skill._id} className="bg-white rounded-lg shadow-md p-6">
+                <div
+                  key={skill._id}
+                  className="bg-white rounded-lg shadow-md p-6"
+                >
                   <h3 className="text-xl font-semibold mb-2">{skill.title}</h3>
                   <p className="text-gray-600 mb-4">{skill.description}</p>
-                  
+
                   <div className="flex space-x-2 mb-4">
                     <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
                       {skill.category}
@@ -64,7 +69,7 @@ export default function MySkills() {
                       {skill.level}
                     </span>
                   </div>
-                  
+
                   {skill.requests && skill.requests.length > 0 && (
                     <div className="mt-4 border-t pt-4">
                       <h4 className="font-semibold mb-2">
@@ -73,9 +78,12 @@ export default function MySkills() {
                       <div className="space-y-2">
                         {skill.requests.map((request, index) => (
                           <div key={index} className="bg-gray-50 p-3 rounded">
-                            <p><strong>{request.user?.name}:</strong> {request.message}</p>
+                            <p>
+                              <strong>{request.user?.name}:</strong>{" "}
+                              {request.message}
+                            </p>
                             <p className="text-sm text-gray-500">
-                              Status: {request.status} | 
+                              Status: {request.status} |
                               {new Date(request.createdAt).toLocaleDateString()}
                             </p>
                           </div>

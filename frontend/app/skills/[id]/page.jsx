@@ -1,16 +1,20 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import Navbar from '../../../components/Navbar';
-import { getSkillById, requestSkill, isAuthenticated } from '../../../utils/api';
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import Navbar from "../../../components/Navbar";
+import {
+  getSkillById,
+  requestSkill,
+  isAuthenticated,
+} from "../../../utils/api";
 
 export default function SkillDetail() {
   const params = useParams();
   const { id } = params;
   const [skill, setSkill] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [requestMessage, setRequestMessage] = useState('');
+  const [requestMessage, setRequestMessage] = useState("");
   const [requestLoading, setRequestLoading] = useState(false);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export default function SkillDetail() {
       const data = await getSkillById(id);
       setSkill(data);
     } catch (error) {
-      console.error('Error fetching skill:', error);
+      console.error("Error fetching skill:", error);
     } finally {
       setLoading(false);
     }
@@ -36,11 +40,11 @@ export default function SkillDetail() {
 
     try {
       await requestSkill(id, requestMessage);
-      alert('Request sent successfully!');
-      setRequestMessage('');
+      alert("Request sent successfully!");
+      setRequestMessage("");
       fetchSkill();
     } catch (error) {
-      alert(error.response?.data?.message || 'Failed to send request');
+      alert(error.response?.data?.message || "Failed to send request");
     } finally {
       setRequestLoading(false);
     }
@@ -75,7 +79,7 @@ export default function SkillDetail() {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-md p-8">
             <h1 className="text-3xl font-bold mb-4">{skill.title}</h1>
-            
+
             <div className="flex space-x-4 mb-6">
               <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded">
                 {skill.category}
@@ -84,14 +88,16 @@ export default function SkillDetail() {
                 {skill.level}
               </span>
             </div>
-            
+
             <p className="text-gray-700 mb-6">{skill.description}</p>
-            
+
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-2">Instructor</h3>
-              <p className="text-gray-600">{skill.author?.name} ({skill.author?.email})</p>
+              <p className="text-gray-600">
+                {skill.author?.name} ({skill.author?.email})
+              </p>
             </div>
-            
+
             {isAuthenticated() && (
               <div className="mt-8 border-t pt-6">
                 <h3 className="text-lg font-semibold mb-4">Request to Learn</h3>
@@ -109,7 +115,7 @@ export default function SkillDetail() {
                     disabled={requestLoading}
                     className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
                   >
-                    {requestLoading ? 'Sending...' : 'Send Request'}
+                    {requestLoading ? "Sending..." : "Send Request"}
                   </button>
                 </form>
               </div>
