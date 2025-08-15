@@ -12,7 +12,7 @@ connectDB();
 
 app.use(cors());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "*",
+  origin: ["http://localhost:3000", "https://skillshare-7djy.onrender.com"],
   credentials: true
 }));
 app.use(express.json());
