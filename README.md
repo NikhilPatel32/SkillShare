@@ -81,3 +81,4 @@ cd frontend
 npm install
 npm run dev
 ```
+ **Live Demo**: [Click here to view the deployed app](https://skill-share-iota.vercel.app/)
